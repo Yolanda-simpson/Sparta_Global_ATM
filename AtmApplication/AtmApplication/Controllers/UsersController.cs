@@ -6,19 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AtmApplication;
 using AtmApplication.Models;
 
 namespace AtmApplication.Controllers
 {
     public class UsersController : Controller
     {
-        private ATMDBEntities db = new ATMDBEntities();
+        private ATMDBEntities1 db = new ATMDBEntities1();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var users = db.Users.Include(u => u.Card);
+            return View(users.ToList());
         }
 
         // GET: Users/Details/5
@@ -39,6 +39,7 @@ namespace AtmApplication.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType");
             return View();
         }
 
@@ -47,7 +48,7 @@ namespace AtmApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin")] User user)
+        public ActionResult Create([Bind(Include = "UsersId,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin,CardID")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -56,10 +57,9 @@ namespace AtmApplication.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
             return View(user);
         }
-
-        
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
@@ -73,6 +73,7 @@ namespace AtmApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
             return View(user);
         }
 
@@ -81,7 +82,7 @@ namespace AtmApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin")] User user)
+        public ActionResult Edit([Bind(Include = "UsersId,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin,CardID")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +90,7 @@ namespace AtmApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
             return View(user);
         }
 

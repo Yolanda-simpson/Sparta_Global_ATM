@@ -6,17 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AtmApplication;
+using AtmApplication.Models;
 
 namespace AtmApplication.Controllers
 {
     public class LoginController : Controller
     {
-        private ATMDBEntities db = new ATMDBEntities();
+        private ATMDBEntities1 db = new ATMDBEntities1();
 
         // GET: Login
         public ActionResult Login()
         {
+            
             return View();
         }
 
@@ -34,30 +35,6 @@ namespace AtmApplication.Controllers
             }
             return View(user);
         }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Login/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(user);
-        }
-
         //POST: Login
         [HttpPost]
         public ActionResult Login(User user)
@@ -67,12 +44,44 @@ namespace AtmApplication.Controllers
             {
                 return RedirectToAction("Create", "Users");
             }
-            
 
-                //user directed to own details 
-                return View("Transactions", usr);
 
-          
+            //user directed to own details 
+            return View("Details", usr);
+
+
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        // GET: Login/Create
+        public ActionResult Create()
+        {
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType");
+            return View();
+        }
+
+        // POST: Login/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "UsersId,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin,CardID")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
+            return View(user);
         }
 
         // GET: Login/Edit/5
@@ -87,6 +96,7 @@ namespace AtmApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
             return View(user);
         }
 
@@ -95,7 +105,7 @@ namespace AtmApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin")] User user)
+        public ActionResult Edit([Bind(Include = "UsersId,FirstName_,LastName,TelephoneNumber,AddressLine1,AddressLine2,AddressLine3,CustomerNumber,Pin,CardID")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +113,7 @@ namespace AtmApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", user.CardID);
             return View(user);
         }
 

@@ -1,4 +1,4 @@
-﻿@model AtmApplication.Transaction
+﻿@model AtmApplication.Models.Transaction
 
 @{
     ViewBag.Title = "Details";
@@ -42,9 +42,25 @@
             @Html.DisplayFor(model => model.TransactionType)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.CardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Card.CardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Card.CardType)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TransactionsId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

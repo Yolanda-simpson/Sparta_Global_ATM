@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AtmApplication.Models.BankAccount>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalBalance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalBalance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BankAccountId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BankAccountId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BankAccountId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\tech-w99a.LAPTOP-3BLG1NHP\Engineering26\week12\AtmApplication\AtmApplication\Models\AtmDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\tech-w99a.LAPTOP-3BLG1NHP\Engineering26\week12\day4\Sparta_Global_ATM\AtmApplication\AtmApplication\Models\ATMModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

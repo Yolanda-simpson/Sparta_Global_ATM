@@ -1,4 +1,4 @@
-﻿@model AtmApplication.User
+﻿@model AtmApplication.Models.Transaction
 
 @{
     ViewBag.Title = "Transactions";
@@ -7,76 +7,60 @@
 <h2>Transactions</h2>
 
 <div>
-    <h4>User</h4>
+    <h4>Transaction</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName_)
+            @Html.DisplayNameFor(model => model.TransactionDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName_)
+            @Html.DisplayFor(model => model.TransactionDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.TransactionTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.TransactionTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TelephoneNumber)
+            @Html.DisplayNameFor(model => model.TransactionLocation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TelephoneNumber)
+            @Html.DisplayFor(model => model.TransactionLocation)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AddressLine1)
+            @Html.DisplayNameFor(model => model.TransactionType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AddressLine1)
+            @Html.DisplayFor(model => model.TransactionType)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AddressLine2)
+            @Html.DisplayNameFor(model => model.CardType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AddressLine2)
+            @Html.DisplayFor(model => model.CardType)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AddressLine3)
+            @Html.DisplayNameFor(model => model.Card.CardType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AddressLine3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pin)
+            @Html.DisplayFor(model => model.Card.CardType)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TransactionsId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

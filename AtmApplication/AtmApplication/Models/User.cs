@@ -14,7 +14,7 @@ namespace AtmApplication.Models
     
     public partial class User
     {
-        public int Id { get; set; }
+        public int UsersId { get; set; }
         public string FirstName_ { get; set; }
         public string LastName { get; set; }
         public string TelephoneNumber { get; set; }
@@ -23,5 +23,8 @@ namespace AtmApplication.Models
         public string AddressLine3 { get; set; }
         public Nullable<int> CustomerNumber { get; set; }
         public Nullable<int> Pin { get; set; }
+        public Nullable<int> CardID { get; set; }
+    
+        public virtual Card Card { get; set; }
     }
 }

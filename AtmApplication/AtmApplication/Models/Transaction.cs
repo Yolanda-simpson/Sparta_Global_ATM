@@ -14,11 +14,15 @@ namespace AtmApplication.Models
     
     public partial class Transaction
     {
-        public int Id { get; set; }
+        public int TransactionsId { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public Nullable<System.DateTime> TransactionTime { get; set; }
         public string TransactionLocation { get; set; }
         public string TransactionType { get; set; }
         public Nullable<int> CardType { get; set; }
+        public Nullable<int> CardID { get; set; }
+        public string Amount { get; set; }
+    
+        public virtual Card Card { get; set; }
     }
 }

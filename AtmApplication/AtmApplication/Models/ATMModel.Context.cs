@@ -13,10 +13,10 @@ namespace AtmApplication.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ATMDBEntities : DbContext
+    public partial class ATMDBEntities1 : DbContext
     {
-        public ATMDBEntities()
-            : base("name=ATMDBEntities")
+        public ATMDBEntities1()
+            : base("name=ATMDBEntities1")
         {
         }
     
@@ -25,8 +25,9 @@ namespace AtmApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BankAccount> BankAccounts { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
     }
 }

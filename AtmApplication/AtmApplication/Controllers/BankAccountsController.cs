@@ -6,111 +6,111 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AtmApplication;
+using AtmApplication.Models;
 
 namespace AtmApplication.Controllers
 {
-    public class WithdrawalsController : Controller
+    public class BankAccountsController : Controller
     {
-        private ATMDBEntities db = new ATMDBEntities();
+        private ATMDBEntities1 db = new ATMDBEntities1();
 
-        // GET: Withdrawals
+        // GET: BankAccounts
         public ActionResult Index()
         {
-            return View(db.Withdrawals.ToList());
+            return View(db.BankAccounts.ToList());
         }
 
-        // GET: Withdrawals/Details/5
+        // GET: BankAccounts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Withdrawal withdrawal = db.Withdrawals.Find(id);
-            if (withdrawal == null)
+            BankAccount bankAccount = db.BankAccounts.Find(id);
+            if (bankAccount == null)
             {
                 return HttpNotFound();
             }
-            return View(withdrawal);
+            return View(bankAccount);
         }
 
-        // GET: Withdrawals/Create
+        // GET: BankAccounts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Withdrawals/Create
+        // POST: BankAccounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,WithdrawalAmount,WithdrawalDate")] Withdrawal withdrawal)
+        public ActionResult Create([Bind(Include = "BankAccountId,AccountType,BranchName,Location,TotalBalance")] BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
-                db.Withdrawals.Add(withdrawal);
+                db.BankAccounts.Add(bankAccount);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(withdrawal);
+            return View(bankAccount);
         }
 
-        // GET: Withdrawals/Edit/5
+        // GET: BankAccounts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Withdrawal withdrawal = db.Withdrawals.Find(id);
-            if (withdrawal == null)
+            BankAccount bankAccount = db.BankAccounts.Find(id);
+            if (bankAccount == null)
             {
                 return HttpNotFound();
             }
-            return View(withdrawal);
+            return View(bankAccount);
         }
 
-        // POST: Withdrawals/Edit/5
+        // POST: BankAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,WithdrawalAmount,WithdrawalDate")] Withdrawal withdrawal)
+        public ActionResult Edit([Bind(Include = "BankAccountId,AccountType,BranchName,Location,TotalBalance")] BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(withdrawal).State = EntityState.Modified;
+                db.Entry(bankAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(withdrawal);
+            return View(bankAccount);
         }
 
-        // GET: Withdrawals/Delete/5
+        // GET: BankAccounts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Withdrawal withdrawal = db.Withdrawals.Find(id);
-            if (withdrawal == null)
+            BankAccount bankAccount = db.BankAccounts.Find(id);
+            if (bankAccount == null)
             {
                 return HttpNotFound();
             }
-            return View(withdrawal);
+            return View(bankAccount);
         }
 
-        // POST: Withdrawals/Delete/5
+        // POST: BankAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Withdrawal withdrawal = db.Withdrawals.Find(id);
-            db.Withdrawals.Remove(withdrawal);
+            BankAccount bankAccount = db.BankAccounts.Find(id);
+            db.BankAccounts.Remove(bankAccount);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

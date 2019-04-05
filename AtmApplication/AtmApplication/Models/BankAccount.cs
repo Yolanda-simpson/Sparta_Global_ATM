@@ -12,10 +12,12 @@ namespace AtmApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Withdrawal
+    public partial class BankAccount
     {
-        public int Id { get; set; }
-        public Nullable<int> WithdrawalAmount { get; set; }
-        public Nullable<System.DateTime> WithdrawalDate { get; set; }
+        public int BankAccountId { get; set; }
+        public string AccountType { get; set; }
+        public string BranchName { get; set; }
+        public string Location { get; set; }
+        public Nullable<int> TotalBalance { get; set; }
     }
 }

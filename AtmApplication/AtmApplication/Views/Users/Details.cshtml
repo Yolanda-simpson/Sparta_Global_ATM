@@ -1,4 +1,4 @@
-﻿@model AtmApplication.User
+﻿@model AtmApplication.Models.User
 
 @{
     ViewBag.Title = "Details";
@@ -74,9 +74,17 @@
             @Html.DisplayFor(model => model.Pin)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Card.CardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Card.CardType)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UsersId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

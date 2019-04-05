@@ -10,112 +10,107 @@ using AtmApplication.Models;
 
 namespace AtmApplication.Controllers
 {
-    public class TransactionsController : Controller
+    public class CardsController : Controller
     {
         private ATMDBEntities1 db = new ATMDBEntities1();
 
-        // GET: Transactions
+        // GET: Cards
         public ActionResult Index()
         {
-            var transactions = db.Transactions.Include(t => t.Card);
-            return View(transactions.ToList());
+            return View(db.Cards.ToList());
         }
 
-        // GET: Transactions/Details/5
+        // GET: Cards/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
+            Card card = db.Cards.Find(id);
+            if (card == null)
             {
                 return HttpNotFound();
             }
-            return View(transaction);
+            return View(card);
         }
 
-        // GET: Transactions/Create
+        // GET: Cards/Create
         public ActionResult Create()
         {
-            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType");
             return View();
         }
 
-        // POST: Transactions/Create
+        // POST: Cards/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TransactionsId,TransactionDate,TransactionTime,TransactionLocation,TransactionType,CardType,CardID")] Transaction transaction)
+        public ActionResult Create([Bind(Include = "CardId,Pin,Balance_,CardNumber,SortCode,CardType")] Card card)
         {
             if (ModelState.IsValid)
             {
-                db.Transactions.Add(transaction);
+                db.Cards.Add(card);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", transaction.CardID);
-            return View(transaction);
+            return View(card);
         }
 
-        // GET: Transactions/Edit/5
+        // GET: Cards/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
+            Card card = db.Cards.Find(id);
+            if (card == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", transaction.CardID);
-            return View(transaction);
+            return View(card);
         }
 
-        // POST: Transactions/Edit/5
+        // POST: Cards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TransactionsId,TransactionDate,TransactionTime,TransactionLocation,TransactionType,CardType,CardID")] Transaction transaction)
+        public ActionResult Edit([Bind(Include = "CardId,Pin,Balance_,CardNumber,SortCode,CardType")] Card card)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transaction).State = EntityState.Modified;
+                db.Entry(card).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CardID = new SelectList(db.Cards, "CardId", "CardType", transaction.CardID);
-            return View(transaction);
+            return View(card);
         }
 
-        // GET: Transactions/Delete/5
+        // GET: Cards/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
+            Card card = db.Cards.Find(id);
+            if (card == null)
             {
                 return HttpNotFound();
             }
-            return View(transaction);
+            return View(card);
         }
 
-        // POST: Transactions/Delete/5
+        // POST: Cards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Transaction transaction = db.Transactions.Find(id);
-            db.Transactions.Remove(transaction);
+            Card card = db.Cards.Find(id);
+            db.Cards.Remove(card);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
